@@ -29,7 +29,7 @@ export class EmpresaService extends ApiBase {
         return this.put(this.url.empresa + '/' + empresa_id, data);
     }
 
-    deleteEmpresa(empresa_id : any) {
-        return this.delete(this.url.empresa + '/' + empresa_id);
+    deleteEmpresa(empresa_id : any, data:any) {
+        return this.delete(this.url.empresa + '/' + empresa_id,data);
     }
 }
