@@ -1,20 +1,23 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
-import { Router } from '@angular/router';
 import { ToasterService, ToasterConfig }  from 'angular2-toaster';
+
 
 @Component({
   selector: 'app-proveedor-list',
   templateUrl: './proveedor-list.component.html',
   styleUrls: ['./proveedor-list.component.css'],
-  encapsulation: ViewEncapsulation.None
+
+
 })
+
+
 export class ProveedorListComponent implements OnInit {
 
   public data;
   
   public filterQuery = '';
-  public rowsOnPage = 15;
+  public rowsOnPage = 20;
   public sortBy = "id";
   public sortOrder = "asc";
   public opcion;
@@ -43,7 +46,7 @@ export class ProveedorListComponent implements OnInit {
   public toasterconfig : ToasterConfig =
     new ToasterConfig({
       tapToDismiss: true,
-      timeout: 5000
+      timeout: 1000
     });
 
   constructor(private proveedorService:ProveedorService, toasterService: ToasterService) {
@@ -52,11 +55,11 @@ export class ProveedorListComponent implements OnInit {
 
   ngOnInit() {
     this.currentPage = <any>localStorage.getItem('page_proveedores');
-    this.loadProveedor();
+    this.loadProveedores();
     
   }
 
-  loadProveedor(busqueda? : any, resetPagina? : boolean){
+  loadProveedores(busqueda? : any, resetPagina? : boolean){
 
     //Guardamos la pagina actual
     var page = this.currentPage;
@@ -90,12 +93,12 @@ export class ProveedorListComponent implements OnInit {
   pageChanged(page) {
     
     this.currentPage = page;
-    localStorage.setItem('page_usuarios', <any>this.currentPage);
+    localStorage.setItem('page_proveedores', <any>this.currentPage);
     if (this.filterQuery !== '') {
-      this.loadProveedor({nombre : this.filterQuery});
+      this.loadProveedores({nombre : this.filterQuery});
     }
     else {
-      this.loadProveedor();
+      this.loadProveedores();
     }
   }
 
@@ -104,7 +107,7 @@ export class ProveedorListComponent implements OnInit {
     clearTimeout(this.searchTimeout);
     //Volvemos a la pagina 1
     this.searchTimeout = setTimeout(() => {
-      this.loadProveedor({nombre : this.filterQuery}, true)
+      this.loadProveedores({nombre : this.filterQuery}, true)
     }, 1000)
   }
 
@@ -129,10 +132,10 @@ export class ProveedorListComponent implements OnInit {
         break;
     }
     if(this.filterQuery !== ""){
-      this.loadProveedor({nombre : this.filterQuery, sort_by : this.sortBy, direction : this.sortOrder});
+      this.loadProveedores({nombre : this.filterQuery, sort_by : this.sortBy, direction : this.sortOrder});
     }
     else {
-      this.loadProveedor({sort_by : this.sortBy, direction : this.sortOrder})
+      this.loadProveedores({sort_by : this.sortBy, direction : this.sortOrder})
     }
   }
 
@@ -152,11 +155,11 @@ export class ProveedorListComponent implements OnInit {
       this.proveedorService.deleteProveedor({data:1}, this.itemIdEliminar)
       .subscribe((success) => {
         if(success){
-          this.toasterService.pop('success', 'Eliminado', 'El usuario se eliminó con éxito');
+          this.toasterService.pop('success', 'Eliminado', 'se eliminó con éxito');
           this.ngOnInit();
         }
         else
-          this.toasterService.pop('error', 'Error', 'Ocurrio un error al eliminar el usuario');
+          this.toasterService.pop('error', 'Error', 'Ocurrio un error al eliminar');
       })
     }
   }

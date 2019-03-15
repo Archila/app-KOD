@@ -1,52 +1,68 @@
 <div class="card">
-  <div class="card-header">
-    <h4 class="card-tittle" >Listado de usuarios</h4>
-  </div>
-  <div class="card-body">
-    <div class="col-md-12">
-      <div class="row justify-content-between mb-3">
-        <div class="col-md-6">
-          <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Buscar..." (ngModelChange)="search()"/>
+    <div class="card-header">
+      <h4 class="card-tittle" >Listado de Provedores</h4>
+    </div>
+    
+    <div class="card-body">
+      <div class="col-md-12">
+        <div class="row justify-content-between mb-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Buscar..." (ngModelChange)="search()"/>
+            </div>
+          </div>
+          <div class="col-md-2 text-right">
+            <a [routerLink]="['/nuevoproveedor']" class="btn btn btn-primary">Nuevo</a>
           </div>
         </div>
-        <div class="col-md-2 text-right">
-          
-        </div>
       </div>
+      <div class="table-responsive">
+      <table class="table table-striped" [mfData]="data" #mf="mfDataTable">
+        <thead>
+          <tr>
+            <th style="width: 10%">
+              <column-sort [ColumnName]="'#'" [sorted]="isSorted('id')" (SortDirection)="columnSort('id', $event)"></column-sort>
+            </th>
+            <th style="width: 20%">
+              <column-sort [ColumnName]="'Nombre'" [sorted]="isSorted('nombre')" (SortDirection)="columnSort('nombre', $event)"></column-sort>
+            </th>
+            <th style="width: 20%">
+              <column-sort [ColumnName]="'Telefono'" [sorted]="isSorted('Telefono')" (SortDirection)="columnSort('telefono', $event)"></column-sort>
+            </th>
+            <th style="width: 20%">
+              <column-sort [ColumnName]="'Ubicacion'" [sorted]="isSorted('Ubicacion')" (SortDirection)="columnSort('ubicacion', $event)"></column-sort>
+            </th>
+            <th style="width: 30%">
+              Opciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of mf.data ">
+            <td>{{item.id}}</td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.telefono}}</td>
+            <td>{{item.ubicacion}}</td>
+            <td>
+           
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <pagination *ngIf="totalItems" [previousText]="'Ant'" [nextText]="'Sig'" [rotate]="rotate" [maxSize]="maxSize" 
+      [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="+currentPage" (pageChanged)="pageChanged($event.page)"></pagination>
     </div>
-    <div class="table-responsive">
-    <table class="table table-striped" [mfData]="data" #mf="mfDataTable">
-      <thead>
-        <tr>
-          <th style="width: 10%">
-            <column-sort [ColumnName]="'Número'" [sorted]="isSorted('id')" (SortDirection)="columnSort('id', $event)"></column-sort>
-          </th>
-         
-          <th style="width: 30%">
-            Opciones
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of mf.data ">
-          <td>{{item.id}}</td>
-          <td>{{item.nombre}}</td>
-      
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="4">
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-    <pagination *ngIf="totalItems" [previousText]="'Ant'" [nextText]="'Sig'" [rotate]="rotate" [maxSize]="maxSize" 
-    [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="+currentPage" (pageChanged)="pageChanged($event.page)"></pagination>
+    </div>
   </div>
-  </div>
-</div>
+  
+  
+    <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 
-  <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+

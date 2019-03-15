@@ -11,6 +11,8 @@ export class ProveedorDetailComponent implements OnInit {
   proveedor=[];
   constructor(private proveedorService: ProveedorService, private route: ActivatedRoute, private router:Router) { }
 
+
+
   ngOnInit() {
   /*
     let id= parseInt(this.route.snapshot.paramMap.get('id'));
