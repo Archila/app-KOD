@@ -20,7 +20,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 // Pagination
 
 
-import { ColumnSortModule } from  '../app/components/app-column-sort.component'; 
 import { from } from 'rxjs';
 import {ProveedorListComponent } from './views/proveedor/proveedor-list/proveedor-list.component';
 import {ProveedorDetailComponent } from './views/proveedor/proveedor-detail/proveedor-detail.component';
@@ -45,7 +44,6 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     HttpClientModule, 
     FormsModule,
     ReactiveFormsModule,
-    ColumnSortModule,
     DataTableModule,
     CommonModule,
     ModalModule.forRoot(),
