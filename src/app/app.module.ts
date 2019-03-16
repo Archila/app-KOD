@@ -1,67 +1,71 @@
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InicioModule } from './views/inicio/inicio.module';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { DataTableModule } from 'angular2-datatable';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { SelectModule } from 'ng-select';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
+
+// Import containers
+import {
+  FullLayoutComponent,
+  SimpleLayoutComponent
+} from './containers';
+
+const APP_CONTAINERS = [
+  FullLayoutComponent,
+  SimpleLayoutComponent
+];
+
+// Import components
+import {
+  AppAsideComponent,
+  AppBreadcrumbsComponent,
+  AppFooterComponent,
+  AppHeaderComponent,
+  AppSidebarComponent,
+  AppSidebarFooterComponent,
+  AppSidebarFormComponent,
+  AppSidebarHeaderComponent,
+  AppSidebarMinimizerComponent,
+  APP_SIDEBAR_NAV
+} from './components';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { BrowserModule } from '@angular/platform-browser';
+import {ToasterModule, ToasterService} from 'angular2-toaster';
+import {MatSidenavModule} from '@angular/material/sidenav'; 
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon'; 
 
-
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-// Pagination
-
-
-import { from } from 'rxjs';
-import {ProveedorListComponent } from './views/proveedor/proveedor-list/proveedor-list.component';
-import {ProveedorDetailComponent } from './views/proveedor/proveedor-detail/proveedor-detail.component';
-import {ProveedorNewEditComponent} from './views/proveedor/proveedor-new-edit/proveedor-new-edit.component';
-import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
+const APP_COMPONENTS = [
+  AppAsideComponent,
+  AppBreadcrumbsComponent,
+  AppFooterComponent,
+  AppHeaderComponent,
+  AppSidebarComponent,
+  AppSidebarFooterComponent,
+  AppSidebarFormComponent,
+  AppSidebarHeaderComponent,
+  AppSidebarMinimizerComponent,
+  APP_SIDEBAR_NAV
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProveedorListComponent,
-    ProveedorDetailComponent,
-    ProveedorNewEditComponent,
-    PageNotFoundComponent,
-    DashboardComponent,
+    ...APP_CONTAINERS,
+    ...APP_COMPONENTS
   ],
   imports: [
     BrowserModule,
-    InicioModule,
-    AppRoutingModule,
-    HttpClientModule, 
-    FormsModule,
-    ReactiveFormsModule,
-    DataTableModule,
-    CommonModule,
-    ModalModule.forRoot(),
-    ToasterModule.forRoot(),
-    BsDropdownModule,
-    SelectModule,
-    PaginationModule.forRoot(),
+    AppRoutingModule,  
+    HttpClientModule,
     BrowserAnimationsModule,
-    LayoutModule,
     MatToolbarModule,
-    MatButtonModule,
     MatSidenavModule,
-    MatIconModule,
     MatListModule,
-    CKEditorModule,
-  
+    MatIconModule,
+    ToasterModule.forRoot(),
   ],
-  providers: [ToasterService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

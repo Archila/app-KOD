@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.contenedor {
+    margin: 3%;
+}
+
+.nav-item {
+    font-size: 19;
+}

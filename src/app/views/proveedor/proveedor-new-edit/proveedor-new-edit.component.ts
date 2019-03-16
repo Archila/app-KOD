@@ -7,8 +7,6 @@ import { NgModule } from '@angular/core';
 import { ToasterService, ToasterConfig }  from 'angular2-toaster';
 import {ProveedorService} from '../../../services/proveedor/proveedor.service';
 
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import '@ckeditor/ckeditor5-build-classic/build/translations/es';
 
 @Component({
   selector: 'app-proveedor-new-edit',
