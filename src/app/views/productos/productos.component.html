@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">           
+    <h3>Listado Total de Productos</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <h5 class="card-title">--</h5>   
+      </div>
+      <div class="col-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id=""><mat-icon>search</mat-icon></span>
+          </div>
+          <input type="text" class="form-control" placeholder="Busqueda..." aria-label="Busqueda" 
+          [(ngModel)]="busqueda" (keyup)="buscar()" >
+        </div>
+      </div>
+    </div>
+     
+    <div class="mat-elevation-z4" *ngIf="ready">
+      <table class="table table-stripped"
+      matSort (matSortChange)="sortData($event)" *ngIf="ready">
+        <tr>
+          <th mat-sort-header="nombre">Nombre</th>
+          <th mat-sort-header="cantidad">Cantidad</th>
+          <th mat-sort-header="presentacion">Presentacion</th>
+          <th mat-sort-header="precio">Precio</th>
+          <th mat-sort-header="categoria">Categoria</th>
+          <th mat-sort-header="proveedor">Proveedor</th>          
+        </tr>
+      
+        <tr *ngFor="let item of listadoOrdenado">
+          <td>{{item.nombre}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.presentacion}}</td>
+          <td>{{item.precio}}</td>
+          <td>{{item.categoria}}</td>
+          <td>{{item.proveedor}}</td>
+        </tr>       
+      </table>
+      <mat-paginator [length]="totalItems"
+      [pageSize]="itemsPerPage" 
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      (page)="pageChanged($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div> 
+  
