@@ -1,0 +1,21 @@
+.contenedor {
+    margin: 3%;
+}
+
+.nav-list-item {
+    color: rgb(200, 194, 194);
+    background-color: #1b2d92;
+}
+
+.nav-list-item:hover {
+    color: #ffffff;
+    background-color:#3f51b5    
+}
+.nav-menu {
+    background-color: #1b2d92;
+}
+
+.activo {
+    color: #ffffff;
+    background-color:#1939ee    
+}

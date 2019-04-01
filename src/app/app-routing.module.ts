@@ -1,18 +1,71 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { InicioComponent } from './views/inicio/inicio.component';
-import { ProveedorListComponent } from './views/proveedor/proveedor-list/proveedor-list.component';
-import { ProveedorDetailComponent } from './views/proveedor/proveedor-detail/proveedor-detail.component';
-import { ProveedorNewEditComponent } from './views/proveedor/proveedor-new-edit/proveedor-new-edit.component';
-import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+
+import {
+  FullLayoutComponent,
+  SimpleLayoutComponent
+} from './containers';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/inicio',pathMatch: 'full'},
-  {path: 'inicio',component: InicioComponent,},
-  {path: 'proveedores', component: ProveedorListComponent,},
-  {path: 'proveedor/:id',component: ProveedorDetailComponent},
-  {path: "**", component: PageNotFoundComponent}
+  {
+    path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    component: SimpleLayoutComponent,
+    children: [
+        {
+            path: '',
+            loadChildren: './views/pages/pages.module#PagesModule',
+        }
+    ]
+  },
+  {
+    path: '',
+    component: FullLayoutComponent,
+    //canActivate: [AuthGuardService],
+    //canActivateChild: [AuthGuardService],
+    data: {
+      title: 'Inicio'
+    },
+    children: [
+      {
+        path: 'inicio',
+        loadChildren: './views/inicio/inicio.module#InicioModule',
+        data: {
+          title: 'Inicio'
+        }
+      },   
+      {
+        path: 'prueba',
+        loadChildren: './views/prueba/prueba.module#PruebaModule',
+        data: {
+          title: 'Prueba'
+        }
+      },
+      {
+        path: 'proveedores',
+        loadChildren: './views/proveedor/proveedor.module#ProveedorModule',
+        data: {
+          title: 'Proveedores'
+        }
+      },
+      {
+        path: 'productos',
+        loadChildren: './views/productos/productos.module#ProductosModule',
+        data: {
+          title: 'Proveedores'
+        }
+      },
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: '404',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({
@@ -21,10 +74,3 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents=[
-  InicioComponent,
-  ProveedorListComponent,
-  ProveedorDetailComponent,
-  ProveedorNewEditComponent,
-  PageNotFoundComponent  
-];
